@@ -1,7 +1,8 @@
 class VatNumberValidator
   class APIError < StandardError
     def initialize(result)
-      message = case result['code']
+      code = result['error']['code']
+      message = case code
                 when 101
                   'invalid/missing access_key'
                 when 104
@@ -11,7 +12,7 @@ class VatNumberValidator
                 when 102
                   'inactive user'
                 else
-                  "vatlayer API error code #{result['code']}"
+                  "vatlayer API error code #{code}"
                 end
       super(message)
     end

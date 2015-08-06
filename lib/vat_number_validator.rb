@@ -6,7 +6,7 @@ class VatNumberValidator < ActiveModel::EachValidator
 
   include HTTParty
 
-  base_uri 'http://apilayer.net/api'
+  base_uri 'https://apilayer.net/api'
 
   def validate_each(record, attribute, value)
     unless valid?(value)
@@ -18,7 +18,7 @@ class VatNumberValidator < ActiveModel::EachValidator
 
   def valid?(value)
     result = self.class.get('/validate', http_options(value))
-    raise(VatlayerError.new(result)) if result['success'] == false
+    raise(APIError.new(result)) if result['success'] == false
     result['valid']
   end
 
