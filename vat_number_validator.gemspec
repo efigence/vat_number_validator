@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.authors = 'Marek Lipka'
   s.description = 'Vat number validator for Rails 3+ using vatlayer.com API'
   s.email = 'mlipka@artegence.com'
-  s.files = `git ls-files`.split('\n')
+  s.files = `git ls-files`.split("\n")
 
   s.require_paths = %w(lib)
   s.summary = 'Vat number validator for Rails 3+ using vatlayer.com API'
