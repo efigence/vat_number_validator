@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pry'
 
 class VatNumberValidator < ActiveModel::EachValidator
   require 'vat_number_validator/configuration'
