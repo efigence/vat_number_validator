@@ -4,10 +4,6 @@ class VatNumberValidator < ActiveModel::EachValidator
   require 'vat_number_validator/configuration'
   require 'vat_number_validator/errors'
 
-  include HTTParty
-
-  base_uri 'https://apilayer.net/api'
-
   def validate_each(record, attribute, value)
     unless valid?(value)
       record.errors.add(attribute, :incorrect_vat_number_format)
@@ -16,8 +12,14 @@ class VatNumberValidator < ActiveModel::EachValidator
 
   private
 
+  def base_uri
+    use_https = Configuration.use_https
+    protocol = use_https ? 'https' : 'http'
+    "#{protocol}://apilayer.net/api"
+  end
+
   def valid?(value)
-    result = self.class.get('/validate', http_options(value))
+    result = HTTParty.get(base_uri + '/validate', http_options(value))
     raise(APIError.new(result)) if result['success'] == false
     result['valid']
   end
