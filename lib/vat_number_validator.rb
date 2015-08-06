@@ -13,8 +13,7 @@ class VatNumberValidator < ActiveModel::EachValidator
   private
 
   def base_uri
-    use_https = Configuration.use_https
-    protocol = use_https ? 'https' : 'http'
+    protocol = Configuration.use_https ? 'https' : 'http'
     "#{protocol}://apilayer.net/api"
   end
 
