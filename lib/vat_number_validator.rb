@@ -24,11 +24,16 @@ class VatNumberValidator < ActiveModel::EachValidator
   end
 
   def http_options(value)
-    {
+    default_options = Configuration.http_options
+    query_options = {
       query: {
-        access_key: Configuration.access_key,
-        vat_number: value
+        access_key: Configuration.access_key, vat_number: value
       }
     }
+    if default_options && default_options.is_a?(Hash)
+      default_options.merge(query_options).with_indifferent_access
+    else
+      query_options.with_indifferent_access
+    end
   end
 end
