@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'vat_number_validator'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.authors = 'Marek Lipka'
   s.summary = 'Vat number validator'
   s.description = 'Vat number validator for Rails 3+ using vatlayer.com API'

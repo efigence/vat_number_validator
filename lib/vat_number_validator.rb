@@ -31,9 +31,9 @@ class VatNumberValidator < ActiveModel::EachValidator
       }
     }
     if default_options && default_options.is_a?(Hash)
-      default_options.merge(query_options).with_indifferent_access
+      default_options.merge(query_options)
     else
-      query_options.with_indifferent_access
+      query_options
     end
   end
 end
