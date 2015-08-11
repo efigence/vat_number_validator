@@ -20,7 +20,7 @@ class VatNumberValidator < ActiveModel::EachValidator
   def valid?(value)
     result = HTTParty.get(base_uri + '/validate', http_options(value))
     raise(APIError.new(result)) if result['success'] == false
-    result['valid']
+    options[:check] == :format ? result['format_valid'] : result['valid']
   end
 
   def http_options(value)
